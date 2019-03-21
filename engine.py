@@ -2,6 +2,7 @@ __author__ = 'Harsh Patel'
 import os
 import json
 import random
+from textblob import TextBlob
 import processing
 def clear_no_tracker(sid):
     f=open('temp/'+str(sid)+'.json','r')
@@ -29,26 +30,27 @@ def engine_question(sid,form):
                     no_tracker_local=[]
                     #print('working=finish')
                     list=['q4','q5','q6','q7','q8','q9']
-
+                    list=['q4','q5']
                     r_number=random.randint(0,len(list)-1)
-                    print('track_method',len(track_method))
-                    print('list',len(list))
+                    #print('track_method',len(track_method))
+                    #print('list',len(list))
                     #print(list)
                     #print('before_function',no_tracker)
                     # print('track_method',track_method)
                     if(len(track_method)!=len(list)):
                         while(r_number in track_method):
                             r_number=random.randint(0,len(list)-1)
-                        print('r_number',r_number)
+                        #print('r_number',r_number)
                         result=eval('processing.'+str(list[r_number])+"("+str(no_tracker_local)+",'Nirali Naik','Annu')")
-                        print('result0',result[0])
-                        print(result[1])
-                        print(result[2])
+                        #print('result0',result[0])
+                        #print(result[1])
+                        #print(result[2])
                         update_initialiser(['sid',sid] , ['task',str(list[r_number])] ,['flag',0], ['methods',int(r_number)],['working',result[0]],['number',result[1]])
                         #print('r_number',r_number)
                         #print('result',result)
                         return result[2]
                     else:
+
                         #print('here')
                         result=eval('processing.q3()')
                         update_initialiser(['sid',sid],['task','q3'],['flag',0],['working','finish'])
@@ -60,9 +62,9 @@ def engine_question(sid,form):
                     update_initialiser(['sid',sid],['working',result[0]],['flag',0],['number',result[1]])
                     return result[2]
             if(response=="no"):
-                 print(task)
+                 print('response=no enter',response)
                  result=eval("processing."+str(task)+"_negate("+str(no_tracker)+",'Nirali Naik','Annu')")
-                 update_initialiser(['sid',sid],['response',"yes"],['flag',1])
+                 update_initialiser(['sid',sid],['flag',1])
                  return result
         if(task=="none"):
             result=processing.q1('Nirali Naik','Annu')   #greetings
@@ -86,12 +88,30 @@ def engine_answar(sid,message,form):
     ret_list=initialiser(sid)
     task=ret_list[0]
     flag=ret_list[1]
-    if(flag==0):
-        response=emotions(message['data'])
-        #print('response',response)
-        update_initialiser(['sid',sid],['response',response])
+    working=ret_list[6]
+    response=ret_list[2]
+
+    # if(working=="finish" and response=="no"):
+    #      response="yes"
+    #      update_initialiser(['sid',sid],['response','yes'])
+    # else:
     if(flag==1):
-        pass
+        update_initialiser(['sid',sid],['response','yes'])
+    elif(flag==0):
+        response=emotions(message['data'])
+        print('response',response)
+        update_initialiser(['sid',sid],['response',response])
+    #if(working=="finish"):
+    answars=ret_list[4]
+    number_track=ret_list[5]
+        #if(flag==1):
+        #    takeaction_form(1,task+'_negate',number_track,message,answars)
+        #else:
+    takeaction_form(flag,task,number_track,message,answars)
+    #remove_temp_answars(task,flag,response,sid)
+    #elif(working=="not_finish"):
+        #print('not_finish')
+     #   update_initialiser(['sid',sid],['answars',message])
     # if(flag==1):
     #     #print('flag1')
     #     answars=ret_list[4]
@@ -146,25 +166,25 @@ def initialiser(sid):                                # creates a file and stores
         f.close()
     return ret_list
 
-
 def update_initialiser(*argv):
     f=open('temp/'+str(argv[0][1])+'.json','r')
     file=json.load(f)
-    print('getting type',type(file['methods']))
+    #print('getting type',type(file['methods']))
     f.close()
     #print(argv)
     for arg in argv[1:]:
         if(arg[0]=="methods" or arg[0]=="answars"):
             file[str(arg[0])].append(arg[1])
-            print(type(file[arg[0]]))
-            print('temp file_methods_answars',file)
+            #print('file_temp',file)
+            #print('temp file_methods_answars',file)
         elif(arg[0]=="number"):
-            print('update_function',arg[0],arg[1])
+            #print('update_function',arg[0],arg[1])
             file[(str(arg[0]))]=arg[1]
-            print('temp file_number',file)
+            #print('temp file_number',file)
         else:
             file[str(arg[0])]=arg[1]
-            print('temp file_else',file)
+            #print('temp file_else',file)
+
 
     f.close()
     f=open('temp/'+str(argv[0][1])+'.json','w')
@@ -211,7 +231,18 @@ def remove_temp_answars(task,flag,response,sid):
 
 
 def emotions(text):                           #  finding the emotion of the text
-    if(text=="yes" or text=='Yes'):
+    # testimonial=TextBlob(text)
+    # if(testimonial.sentiment.polarity>=0.0):
+    #     print(testimonial.sentiment.polarity)
+    #     response="yes"
+    #     return response
+    # elif(testimonial.sentiment.polarity<0.0):
+    #     print(testimonial.sentiment.polarity)
+    #     response="no"
+    #     return response
+    #print("text",text)
+    print(text)
+    if(text=="yes" or text=="Yes"):
         response="yes"
         return response
     elif(text=="no" or text=="No"):
@@ -222,8 +253,15 @@ def takeaction_form(flag,task,number_tracker,text,list):         # this decides 
 
     f=open('backend/response.json','r')     # response
     data=json.load(f)
-    list.append(text)
-    data[str(task)+str(number_tracker)]=list
+    #text["reason"] = text.pop("data")
+    #list.append(text)
+    if(len(number_tracker)==0):
+        data["greetings"]=text
+    elif(flag==1):
+        data[str(task)+str(number_tracker[-1])+"_negate"]=text
+    elif(flag==0):
+        data[str(task)+str(number_tracker[-1])]=text
+    #print('saved data',data)
     #print(data)
     f.close()
     with open('backend/response.json','w') as f:

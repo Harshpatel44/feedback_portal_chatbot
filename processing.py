@@ -219,7 +219,6 @@ def q6(no_tracker,faculty="Nirali Naik",user="Harsh"):
     file=open('New_APPROACH/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['creativity']
-
     #print('at_start',no_tracker)
     #print(no_tracker)
     range_list=range(1,len(j_file)+1)
@@ -238,7 +237,7 @@ def q6(no_tracker,faculty="Nirali Naik",user="Harsh"):
         r_number=random.randint(1,len(j_file[str(question_no)]))
         #print(j_file[question_no][str(r_number)])
         #input()
-       #print(j_file[question_no][str(r_number)])
+        #print(j_file[question_no][str(r_number)])
         if(isinstance(j_file[str(question_no)][str(r_number)],list)):   #if it is a list, display all values
             lista=[]
             for j in j_file[r_number]:
