@@ -6,11 +6,11 @@ import random
 
 
 def q1(faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/greetings.json','r')
+    file=open('backend_final/Data/greetings.json','r')
     j_file=json.load(file)
     r_number=random.randint(1,len(j_file))   #taking random value
     r_number=str(r_number).decode("utf-8")
-    print(r_number)
+    #print(r_number)
     # for i in j_file:
     #     print(type(i))
     #     print(j_file[i])
@@ -26,13 +26,13 @@ def q1(faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         #print(str(j_file[r_number]))
         return str(j_file[r_number])
-def q2(faculty="Nirali Naik",user="Harsh"):    #interrupted bye
-    file=open('New_APPROACH/Data/bye.json','r')
+def q2(faculty,user):    #interrupted bye
+    file=open('backend_final/Data/bye.json','r')
     j_file=json.load(file)
     j_file=j_file['interrupted']
     r_number=random.randint(1,len(j_file))   #taking random value
     r_number=str(r_number).decode("utf-8")
-    print(r_number)
+    #print(r_number)
     # for i in j_file:
     #     print(type(i))
     #     print(j_file[i])
@@ -49,12 +49,12 @@ def q2(faculty="Nirali Naik",user="Harsh"):    #interrupted bye
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q3(faculty="Nirali Naik",user="Harsh"):     #good_bye finally
-    file=open('New_APPROACH/Data/bye.json','r')
+    file=open('backend_final/Data/bye.json','r')
     j_file=json.load(file)
     j_file=j_file['good_bye']
     r_number=random.randint(1,len(j_file))   #taking random value
     r_number=str(r_number).decode("utf-8")
-    print(r_number)
+    #print(r_number)
     # for i in j_file:
     #     print(type(i))
     #     print(j_file[i])
@@ -70,7 +70,7 @@ def q3(faculty="Nirali Naik",user="Harsh"):     #good_bye finally
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q4(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['course_completion']
 
@@ -122,7 +122,7 @@ def q4(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q4_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['course_completion_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
@@ -143,7 +143,7 @@ def q4_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q5(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['punctuality']
 
@@ -195,7 +195,7 @@ def q5(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q5_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['punctuality_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
@@ -216,7 +216,7 @@ def q5_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q6(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['creativity']
     #print('at_start',no_tracker)
@@ -267,7 +267,7 @@ def q6(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q6_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['creativity_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
@@ -288,7 +288,7 @@ def q6_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q7(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['solving_problems']
 
@@ -340,7 +340,7 @@ def q7(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q7_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['solving_problems_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
@@ -361,7 +361,7 @@ def q7_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q8(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['knowledge']
 
@@ -413,7 +413,7 @@ def q8(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q8_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['knowledge_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
@@ -434,7 +434,7 @@ def q8_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q9(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['mode_of_teaching']
 
@@ -486,7 +486,7 @@ def q9(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q9_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['mode_of_teaching_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
@@ -507,7 +507,7 @@ def q9_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q10(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['motivate']
 
@@ -559,7 +559,7 @@ def q10(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q10_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['motivate_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
@@ -580,7 +580,7 @@ def q10_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q11(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['interaction']
 
@@ -632,7 +632,7 @@ def q11(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q11_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['interaction_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
@@ -653,7 +653,7 @@ def q11_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q12(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['pedagogical_effectiveness']
 
@@ -705,7 +705,7 @@ def q12(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q12_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['pedagogical_effectiveness_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
@@ -726,7 +726,7 @@ def q12_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
         j_file[r_number]=str(j_file[r_number]).replace('+',user)
         return str(j_file[r_number])
 def q13(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['classroom_env']
 
@@ -778,7 +778,7 @@ def q13(no_tracker,faculty="Nirali Naik",user="Harsh"):
                 #print(no_tracker)
                 return ['not_finish',no_tracker,str(j_file[str(question_no)][str(r_number)])]
 def q13_negate(no_tracker,faculty="Nirali Naik",user="Harsh"):
-    file=open('New_APPROACH/Data/characteristics.json','r')
+    file=open('backend_final/Data/characteristics.json','r')
     j_file=json.load(file)
     j_file=j_file['classroom_env_negate']
     r_number=random.randint(1,len(j_file))   #taking random value
