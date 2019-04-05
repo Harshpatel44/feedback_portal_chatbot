@@ -1,5 +1,5 @@
 	$("#only_mobile").hide();
-	var socket = io.connect("http://127.0.0.1:5000");
+	var socket = io.connect("http://134.209.42.61:5001");
 	socket.removeAllListeners();
 	console.log('function in');
 	socket.on('connect',function(){
