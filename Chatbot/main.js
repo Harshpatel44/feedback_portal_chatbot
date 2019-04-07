@@ -1,5 +1,5 @@
 	$("#only_mobile").hide();
-	var socket = io.connect("http://134.209.42.61:5001");
+	var socket = io.connect("http://127.0.0.1:5000");
 	socket.removeAllListeners();
 	console.log('function in');
 	socket.on('connect',function(){
@@ -26,9 +26,11 @@ else{
 function start_socket(){ 
 	$("#only_mobile").show();
 	$("#right_bar").show();
+	
 	$("#reply_div").show();
 	$("#reply_div").css("position","fixed");
 	$("#left_bar").css("display","none");
+
 
 	socket.emit('greet_event',{
 			
@@ -60,13 +62,13 @@ $('#input').on('blur',function () {
 
 function add_chat(value='default'){
 		if(value!='default'){
-			console.log($('#'+value).val());
+			console.log(value);
 			socket.emit('send_answar',{
-			data: $('#'+value).val()
+			data: value
 			});
 			text=`<div id='block_right'">
      					<div class='input-group mb-3' id="block_in_block_right">
-      						<li style='margin-right:4px;display:table;border: solid 2px #205d77;background: rgba(234, 242, 246);color:#205d77;border-bottom-right-radius:25px; border-top-left-radius:5px;padding:15px;margin-top: 0px;margin-bottom:10px;max-width: 90%;'>`+$('#'+value).val()+`</li>
+      						<li style='margin-right:4px;display:table;border: solid 2px #205d77;background: rgba(234, 242, 246);color:#205d77;border-bottom-right-radius:25px; border-top-left-radius:5px;padding:15px;margin-top: 0px;margin-bottom:10px;max-width: 90%;'>`+value+`</li>
                   <div class="input-group-append" style="margin-right: 0px; padding: 0px;">
                     <img src="../static/images/user.png" class='img-responsive' id='block_image_right'>
                   </div>
@@ -112,10 +114,9 @@ socket.on('get_faculty',function(msg){
 	//form.append('image',image);
 	fac_img=msg['image_data'];
 	fac_name=msg['fac_name'];
-	fac_dept=msg['fac_dept'];;
+	fac_dept=msg['fac_dept'];
 	fac_desig=msg['fac_desig'];;
 	fac_insti=msg['fac_insti'];
-	fac_mail=msg['fac_mail'];
 	if ($(window).width() < 600) {
     text=
 	`<div id="faculty_heading"><h5><b>Faculty Information</b></h5></div>
@@ -132,12 +133,23 @@ socket.on('get_faculty',function(msg){
         <img class="img-responsive" alt="faculty_image" src="data:image/jpeg;base64,`+fac_img+`" id="faculty_img">
         <div id="faculty_desc">
           <p>`+fac_name+`<br>`+fac_desig+`<br>`+fac_dept+`<br>Department<br>`+fac_insti+`<br></p>
-          <a href="mailto:`+fac_mail+`"><i class="fa fa-envelope-o" style="font-size:36px; color: white;"></i></a>
+          
         </div>`
 	}
 	$("#faculty_info").append(text);
 });
 
+
+
+socket.on('suggestions',function(msg){
+
+	
+	for (var i = 0; i < 5; i++) {
+		text=`<button class="btn btn-secondary" type="button" onclick="add_chat('`+msg[i]+`')" id="`+msg[i]+`" value="`+msg[i]+`" style="vertical-align: middle;">`+msg[i]+`</button>`;
+		$('#emoji').append(text);
+	}
+	
+});
 
 
 var txt=''	
@@ -158,6 +170,7 @@ socket.on('get_question',function(msg){
 		$("#no_btn").prop('disabled',true);
 		$("#okay_btn").prop('disabled',true);
 		$( "#input" ).prop( "disabled", true );
+		socket.disconnect()
 	}
 	else{
 		
